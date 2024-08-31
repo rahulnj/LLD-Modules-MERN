@@ -43,12 +43,77 @@ arrFn2[2](); // Output: 2
 
 // Problem 2: Lexical env
 var varName = 10;
-function b() {
+function fnb() {
   console.log(varName);
 }
 function fn2() {
   var varName = 20;
-  b();
+  fnb();
   console.log(varName);
 }
 fn2(); // Output : 10, 20
+
+// Problem 3: Lexical env
+let a;
+console.log(a); // undefined
+function A() {
+  let a = 2;
+  console.log(a); // 2
+  function C() {
+    console.log(a); // 2
+    function D() {
+      console.log(a); // 2
+      a = 4;
+    }
+    D();
+    a = 3;
+  }
+  C();
+}
+a = 3;
+A(); // Output : undefined 2 2 2
+
+// Problem 4 : Lexical scope
+let b;
+console.log(b); // undefined
+function B() {
+  let b;
+  console.log(b); // undefined
+  function E() {
+    b = 6;
+    console.log(b); // 6
+  }
+  b = 2;
+  E();
+  console.log(b); // 6
+}
+
+b = 3;
+
+B(); // Output : undefined undefined 6 6
+
+// Problem 4 : lexical scope
+let c;
+console.log(c); // undefined
+function F() {
+  console.log(c); // 2
+  c = 3;
+}
+c = 2;
+F(); // Output : undefined 2
+
+// Problem 5
+function createCounter(init, delta) {
+  function count() {
+    init = init + delta;
+    return init;
+  }
+  return count;
+}
+let c1 = createCounter(10, 5);
+let c2 = createCounter(5, 2);
+
+console.log(c1()); // 15
+console.log(c2()); // 7
+console.log(c1()); // 20
+console.log(c2()); // 9
