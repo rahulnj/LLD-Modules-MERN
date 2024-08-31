@@ -168,3 +168,45 @@ console.log('final value: ', iamINGEC);
 // Hi I am Rajneesh Kumar
 // Hi GEC 205
 // final value:  206
+
+/*--------------------------------- asynchrounous code  ---------------------------------**/
+
+let j = 200;
+console.log('Before');
+
+function cb() {
+  console.log('I will explode', j);
+}
+setTimeout(cb, 2000);
+
+console.log('After');
+for (let i = 0; i < 1000; i++) {
+  j++;
+}
+/*
+Output : 
+Before
+After
+I will explode 1200 // will print after 2 seconds
+*/
+
+function fun() {
+  let a = 200;
+  console.log('Before');
+
+  function cb() {
+    console.log('I will explode', a);
+  }
+
+  console.log('After');
+  return cb;
+}
+
+setTimeout(fun(), 2000);
+/*
+Output : 
+
+Before
+After
+I will explode 200 // will print after 2 seconds
+*/
