@@ -1,3 +1,9 @@
+/* A closure is the combination of a function bundled together (enclosed) with 
+references to its surrounding state (the lexical environment). In other words, 
+a closure gives a function access to its outer scope. In JavaScript, closures 
+are created every time a function is created, at function creation time.
+ */
+
 // Problem 1:
 function outer1() {
   let arrFn = [];
@@ -117,3 +123,48 @@ console.log(c1()); // 15
 console.log(c2()); // 7
 console.log(c1()); // 20
 console.log(c2()); // 9
+
+// Problem 6
+/***
+ * Nested closure : you will get access to outer variable even if the
+ * outer fn is not your direct parent
+ * */
+let iamINGEC = 200;
+function getFirstName(firstName) {
+  console.log('I have got your first Name');
+  return function getLastName(lastName) {
+    console.log('I have got Your last Name');
+    return function getGreeter() {
+      console.log(`Hi I am ${firstName} ${lastName}`); // closure
+      console.log('Hi GEC', iamINGEC); // Lexical scope
+      iamINGEC++;
+    };
+  };
+}
+
+const lnNameRtrn = getFirstName('Rajneesh');
+const greeter = lnNameRtrn('Kumar');
+
+greeter();
+greeter();
+greeter();
+greeter();
+greeter();
+greeter();
+console.log('final value: ', iamINGEC);
+// Output :
+// I have got your first Name
+// I have got Your last Name
+// Hi I am Rajneesh Kumar
+// Hi GEC 200
+// Hi I am Rajneesh Kumar
+// Hi GEC 201
+// Hi I am Rajneesh Kumar
+// Hi GEC 202
+// Hi I am Rajneesh Kumar
+// Hi GEC 203
+// Hi I am Rajneesh Kumar
+// Hi GEC 204
+// Hi I am Rajneesh Kumar
+// Hi GEC 205
+// final value:  206
