@@ -210,3 +210,44 @@ Before
 After
 I will explode 200 // will print after 2 seconds
 */
+
+/*--------------------------------- application of closure  ---------------------------------**/
+
+// console.log(fn3(1)(3));
+// console.log(fn3(1, 3));
+
+function fn4(a) {
+  if (!a) return 0;
+
+  let result = a;
+  return function innerFn(a) {
+    if (a) {
+      result += a;
+      return innerFn;
+    } else {
+      return result;
+    }
+  };
+}
+// console.log(fn4());
+// console.log(fn4(2)(2)()); // Output: 4
+// console.log(fn4(2)(3)(4)(0)); // Output: 9
+// console.log(fn4(5)(10)(15)()); // Output: 30
+
+// another approach for the above function
+function sum(a) {
+  if (!a) {
+    return 0;
+  }
+
+  return function (b) {
+    if (b) {
+      return sum(a + b);
+    }
+    return a;
+  };
+}
+// console.log(sum());
+// console.log(sum(2)(2)()); // Output: 4
+// console.log(sum(2)(3)(4)(0)); // Output: 9
+// console.log(sum(5)(10)(15)()); // Output: 30

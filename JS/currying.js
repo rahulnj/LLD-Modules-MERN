@@ -15,7 +15,7 @@ const func1 = fn1();
 // console.log(func1(1)(1)(1)(0));
 
 // Problem 2:
-function fn3() {
+function fn2() {
   function multiply(a, b) {
     return a * b;
   }
@@ -31,12 +31,12 @@ function fn3() {
   };
 }
 
-const func3 = fn3();
+const func2 = fn2();
 // console.log(func3(1)(3));
 // console.log(func3(1, 3));
 
 // same as problem 2 but direct call without assigning to a variable
-function fn4(a, b) {
+function fn3(a, b) {
   function multiply(a, b) {
     return a * b;
   }
@@ -48,6 +48,3 @@ function fn4(a, b) {
     };
   }
 }
-
-// console.log(fn4(1)(3));
-// console.log(fn4(1, 3));
