@@ -1,3 +1,4 @@
+// Problem 1:
 function outer1() {
   let arrFn = [];
   let i;
@@ -39,3 +40,15 @@ let arrFn2 = outer2();
 arrFn2[0](); // Output: 0
 arrFn2[1](); // Output: 1
 arrFn2[2](); // Output: 2
+
+// Problem 2: Lexical env
+var varName = 10;
+function b() {
+  console.log(varName);
+}
+function fn2() {
+  var varName = 20;
+  b();
+  console.log(varName);
+}
+fn2(); // Output : 10, 20
