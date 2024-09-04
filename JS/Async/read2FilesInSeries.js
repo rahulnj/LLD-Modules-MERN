@@ -1,4 +1,4 @@
-// Raw Problem
+// Problem
 // Complete the function twoSeries(file1, file2, ansArray),
 // which takes in two file names as file1 and file2 and ansArray
 
