@@ -19,7 +19,7 @@ function fetchByCb(fileName, cb) {
 function nSerialReader(idx, files, ansArray) {
   if (idx === files.length) return;
   fetchByCb(files[idx], (content) => {
-    const str = 'content->' + content;
+    const str = 'content -> ' + content;
     ansArray.push(str);
     idx++;
     nSerialReader(idx, files, ansArray);
