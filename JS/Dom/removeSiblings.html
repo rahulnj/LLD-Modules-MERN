@@ -1,0 +1,85 @@
+<!-- Raw Problem
+Write a program in JavaScript to do the below-mentioned task:
+
+Create a generic function to select all siblings of a given node.
+Using that function delete all siblings of the red card.
+
+Note:
+To delete the card, utilise Element.remove() -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding-top: 5rem;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .card {
+            border: 1px solid;
+            height: 10rem;
+            width: 10rem;
+            margin: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card red"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+    </div>
+
+    <script>
+        function getAllSiblings(node) {
+            let siblings = [];
+            let sibling = node.parentNode.firstChild;
+
+            while (sibling) {
+                if (sibling.nodeType === 1 && sibling !== node) {
+                    siblings.push(sibling);
+                }
+                sibling = sibling.nextSibling;
+            }
+            return siblings;
+        }
+
+        function deleteAllSiblings(node) {
+            let siblings = getAllSiblings(node);
+
+            siblings.forEach(sibling => {
+                sibling.parentNode.removeChild(sibling);
+            });
+        }
+
+        const redCard = document.querySelector('.red');
+
+        if (redCard) deleteAllSiblings(redCard);
+    </script>
+</body>
+
+</html>
