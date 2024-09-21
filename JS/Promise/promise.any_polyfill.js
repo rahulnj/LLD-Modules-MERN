@@ -1,36 +1,35 @@
-Promise.myPromiseAll = function (arrayOfPromises) {
-  return new Promise(function (resolve, reject) {
+Promise.myPromiseAny = function (arrayOfPromises) {
+  return new Promise((resolve, reject) => {
     if (!Array.isArray(arrayOfPromises)) {
       reject('Expected a array of Promises.');
       return;
     }
 
     let unResolvedPromises = arrayOfPromises.length;
-    const resolvedPromiseArray = new Array(unResolvedPromises);
+    const errors = [];
 
     if (unResolvedPromises === 0) {
-      resolve(resolvedPromiseArray);
+      reject(new AggregateError([], 'All promises were rejected'));
       return;
     }
 
     arrayOfPromises.forEach((promise, index) => {
       Promise.resolve(promise)
         .then((value) => {
-          resolvedPromiseArray[index] = value;
-          unResolvedPromises--;
-
-          if (unResolvedPromises === 0) {
-            resolve(resolvedPromiseArray);
-          }
+          resolve(value);
         })
         .catch((error) => {
-          reject(error);
+          errors[index] = error;
+          unResolvedPromises--;
+          if (unResolvedPromises === 0) {
+            reject(new AggregateError(errors, 'All promises were rejected'));
+          }
         });
     });
   });
 };
 
-// when any of the promises got rejected.
+// when any of the promises got rejected
 const p0 = Promise.resolve(3);
 const p1 = Promise.resolve(42);
 const p2 = new Promise((resolve, reject) => {
@@ -38,20 +37,22 @@ const p2 = new Promise((resolve, reject) => {
     resolve('Foo');
   }, 1000);
 });
+const p3 = Promise.reject('Error 1');
+const p4 = Promise.reject('Error 2');
 
-// Custom Promise.all
-Promise.myPromiseAll([p0, p1, p2])
+// Custom Promise.any
+Promise.myPromiseAny([p0, p1, p2, p3, p4])
   .then((data) => {
-    console.log('Custom Promise: ', data);
+    console.log('custom: ', data);
   })
   .catch((err) => {
     console.log('Promise got rejected with error: ' + err);
   });
 
-// Native Promise.all
-Promise.all([p0, p1, p2])
+// Native Promise.any
+Promise.any([p0, p1, p2, p3, p4])
   .then((data) => {
-    console.log('Real Promise: ', data);
+    console.log('Real: ', data);
   })
   .catch((err) => {
     console.log('Promise got rejected with error: ' + err);
