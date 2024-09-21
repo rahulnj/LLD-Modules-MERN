@@ -1,0 +1,47 @@
+<!-- Raw Problem
+Write a program in JavaScript to do the below mentioned task:
+
+Map function does not exist for a nodelist like it does for an array.
+Create a function called nodeStyleMapper which takes a nodelist a css property
+name and a value and it add that property
+with the given value to all the dom nodes of the nodelist.
+Using that function make the colour of all p tags red
+
+Note:
+The test case would check if all the p tags have color property set to 'red' or not. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <script>
+        function nodeStyleMapper(nodeList, styleProp, value) {
+            nodeList.forEach((node) => {
+                node.style[styleProp] = value
+            })
+        }
+
+        const nodeList = document.querySelectorAll('p');
+
+        nodeStyleMapper(nodeList, 'color', 'red');
+    </script>
+</body>
+
+</html>
