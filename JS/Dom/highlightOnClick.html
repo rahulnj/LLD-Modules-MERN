@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolores,
+        rerum repudiandae enim consectetur consequatur quae recusandae,
+        perferendis at quod illum, deleniti similique a eius nulla architecto
+        earum. Iure, deleniti.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolores,
+        rerum repudiandae enim consectetur consequatur quae recusandae,
+        perferendis at quod illum, deleniti similique a eius nulla architecto
+        earum. Iure, deleniti.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolores,
+        rerum repudiandae enim consectetur consequatur quae recusandae,
+        perferendis at quod illum, deleniti similique a eius nulla architecto
+        earum. Iure, deleniti.
+    </p>
+    <script>
+        const paraBody = document.querySelector('body');
+
+        paraBody.addEventListener('click', (e) => {
+            if (e.target.tagName === 'P') {
+                let color = '';
+                const clickType = e.detail;
+
+                switch (clickType) {
+                    case 1:
+                        color = 'red';
+                        break;
+                    case 2:
+                        color = 'green';
+                        break;
+                    case 3:
+                        color = '';
+                        break;
+                    default:
+                        return;
+                }
+                e.target.style.backgroundColor = color;
+            }
+        })
+
+    </script>
+</body>
+
+</html>
