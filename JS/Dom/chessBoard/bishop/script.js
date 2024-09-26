@@ -1,9 +1,9 @@
 const checkBoxesDiv = document.querySelectorAll('div.checkbox');
 const directions = [
-  [1, 1],
-  [1, -1],
-  [-1, 1],
-  [-1, -1],
+  [1, 1], // Down-right
+  [-1, -1], // Up-left
+  [-1, 1], // Up-right
+  [1, -1], // Down-left
 ];
 
 checkBoxesDiv.forEach((box, index) => {
