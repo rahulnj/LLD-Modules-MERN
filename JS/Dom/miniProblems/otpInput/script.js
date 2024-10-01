@@ -1,32 +1,32 @@
 const inputs = document.getElementById('inputs');
 
-inputs.addEventListener('input', function (e) {
-  const target = e.target;
-  const val = target.value;
+inputs.addEventListener('input', handleInputFields);
+inputs.addEventListener('keyup', handleBackSpace);
 
-  if (isNaN(val)) {
-    target.value = '';
+function handleInputFields(e) {
+  const selectedInputField = e.target;
+  const inputValue = e.target.value;
+
+  if (isNaN(inputValue)) {
+    selectedInputField.value = '';
     return;
   }
-
-  if (val !== '') {
-    const next = target.nextElementSibling;
-    if (next) {
-      next.focus();
-    }
+  if (inputValue !== '') {
+    const nextInputField = selectedInputField.nextElementSibling;
+    if (nextInputField) nextInputField.focus();
   }
-});
+}
 
-inputs.addEventListener('keyup', function (e) {
-  const target = e.target;
+function handleBackSpace(e) {
+  const selectedInputField = e.target;
+  const REMOVAL_KEYS = ['delete', 'backspace'];
   const key = e.key.toLowerCase();
+  if (REMOVAL_KEYS.includes(key)) {
+    selectedInputField.value = '';
 
-  if (key === 'backspace' || key === 'delete') {
-    target.value = '';
-    const prev = target.previousElementSibling;
-    if (prev) {
-      prev.focus();
-    }
+    const prevInputField = selectedInputField.previousElementSibling;
+    if (prevInputField) prevInputField.focus();
+
     return;
   }
-});
+}
