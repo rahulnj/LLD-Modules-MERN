@@ -1,3 +1,4 @@
+const REMOVAL_KEYS = ['delete', 'backspace'];
 const inputs = document.getElementById('inputs');
 
 inputs.addEventListener('input', handleInputFields);
@@ -19,14 +20,11 @@ function handleInputFields(e) {
 
 function handleBackSpace(e) {
   const selectedInputField = e.target;
-  const REMOVAL_KEYS = ['delete', 'backspace'];
   const key = e.key.toLowerCase();
+
   if (REMOVAL_KEYS.includes(key)) {
     selectedInputField.value = '';
-
     const prevInputField = selectedInputField.previousElementSibling;
     if (prevInputField) prevInputField.focus();
-
-    return;
   }
 }
