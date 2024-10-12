@@ -41,18 +41,21 @@
 <body>
     <div class="container">
         <h1>Count Down timer</h1>
-        <h2 class="timer__label--hrs">Hours</h2>
-        <h2 class="timer__label--mins">Minutes</h2>
-        <h2 class="timer__label--sec">Second</h2>
+        <h2 class="timer__label--hrs">Hours : </h2>
+        <h2 class="timer__label--mins">Minutes : </h2>
+        <h2 class="timer__label--sec">Seconds : </h2>
     </div>
 
     <!-- All the inputs are upto of 2 digits -->
     <div class="timer_inputs">
+        <label for="hours">Hours:</label>
         <input type="number" maxlength="2" oninput="this.value=this.value.slice(0, this.maxLength)" id="hr">
+        <label for="hours">Minutes:</label>
         <input type="number" maxlength="2" oninput="this.value=this.value.slice(0, this.maxLength)" id="min">
+        <label for="hours">Seconds:</label>
         <input type="number" maxlength="2" oninput="this.value=this.value.slice(0, this.maxLength)" id="sec">
     </div>
-
+    <br />
     <!-- Buttons -->
     <div class="container__btns">
         <button class="btn start" id="start">Start</button>
