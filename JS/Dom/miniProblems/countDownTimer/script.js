@@ -15,18 +15,23 @@ let saveTimeLeft = 0;
 
 const inputs = document.querySelectorAll('.timer_inputs input');
 inputs.forEach((input) => {
-  input.addEventListener('keyup', ({ target: { value } }) => {
-    if (value !== '' && value !== '00') {
-      startBtn.disabled = false;
-      resetBtn.disabled = false;
-    } else {
-      startBtn.disabled = true;
-      resetBtn.disabled = true;
-    }
-  });
+  input.addEventListener('input', handleInput);
 });
 
-startBtn.addEventListener('click', () => {
+function handleInput() {
+  const anyInputFilled = Array.from(inputs).some(
+    (input) => input.value !== '' && input.value !== '00'
+  );
+  startBtn.disabled = !anyInputFilled;
+  resetBtn.disabled = !anyInputFilled;
+}
+
+startBtn.addEventListener('click', startTimer);
+pauseBtn.addEventListener('click', pauseTimer);
+continueBtn.addEventListener('click', continueTimer);
+resetBtn.addEventListener('click', resetTimer);
+
+function startTimer() {
   const hoursValue = getValidInput(hoursInput.value);
   const minutesValue = getValidInput(minutesInput.value);
   const secondsValue = getValidInput(secondsInput.value);
@@ -39,42 +44,31 @@ startBtn.addEventListener('click', () => {
     hoursValue * SECONDS_IN_HOUR + minutesValue * SECONDS_IN_MIN + secondsValue;
 
   handleTimerRunning(countDownTime);
+  toggleButtons('start');
+}
 
-  startBtn.style.display = 'none';
-  pauseBtn.style.display = 'block';
-  resetBtn.style.display = 'block';
-});
-
-pauseBtn.addEventListener('click', (e) => {
+function pauseTimer() {
   clearInterval(counterId);
+  toggleButtons('pause');
+}
 
-  pauseBtn.style.display = 'none';
-  continueBtn.style.display = 'block';
-});
-
-continueBtn.addEventListener('click', (e) => {
+function continueTimer() {
   handleTimerRunning(saveTimeLeft - 1);
+  toggleButtons('continue');
+}
 
-  continueBtn.style.display = 'none';
-  pauseBtn.style.display = 'block';
-  resetBtn.style.display = 'block';
-});
+function resetTimer() {
+  clearInterval(counterId);
+  resetInputs();
+  saveTimeLeft = 0;
+  toggleButtons('reset');
+  startBtn.disabled = true;
+}
 
-resetBtn.addEventListener('click', handleReset);
-
-function handleReset() {
+function resetInputs() {
   hoursInput.value = '00';
   minutesInput.value = '00';
   secondsInput.value = '00';
-
-  saveTimeLeft = 0;
-  clearInterval(counterId);
-
-  startBtn.style.display = 'block';
-  pauseBtn.style.display = 'none';
-  continueBtn.style.display = 'none';
-  resetBtn.style.display = 'none';
-  startBtn.disabled = true;
 }
 
 function handleTimerRunning(countDownTime) {
@@ -95,14 +89,17 @@ function handleDisplayTime(time) {
   const minutes = Math.floor((time % SECONDS_IN_HOUR) / SECONDS_IN_MIN);
   const seconds = Math.floor(time % SECONDS_IN_MIN);
 
-  console.log(hours + ':' + minutes + ':' + seconds);
   updateUi(hours, minutes, seconds);
 }
 
 function updateUi(hour, minute, second) {
-  hoursInput.value = hour < 10 ? `0${hour}` : hour;
-  minutesInput.value = minute < 10 ? `0${minute}` : minute;
-  secondsInput.value = second < 10 ? `0${second}` : second;
+  hoursInput.value = formatTimeUnit(hour);
+  minutesInput.value = formatTimeUnit(minute);
+  secondsInput.value = formatTimeUnit(second);
+}
+
+function formatTimeUnit(unit) {
+  return unit < 10 ? `0${unit}` : unit;
 }
 
 function validateInputTime(hours, minutes, seconds) {
@@ -121,6 +118,30 @@ function validateInputTime(hours, minutes, seconds) {
   }
 
   return true;
+}
+
+function toggleButtons(action) {
+  switch (action) {
+    case 'start':
+      startBtn.style.display = 'none';
+      pauseBtn.style.display = 'block';
+      resetBtn.style.display = 'block';
+      break;
+    case 'pause':
+      pauseBtn.style.display = 'none';
+      continueBtn.style.display = 'block';
+      break;
+    case 'continue':
+      continueBtn.style.display = 'none';
+      pauseBtn.style.display = 'block';
+      break;
+    case 'reset':
+      startBtn.style.display = 'block';
+      pauseBtn.style.display = 'none';
+      continueBtn.style.display = 'none';
+      resetBtn.style.display = 'none';
+      break;
+  }
 }
 
 function getValidInput(value) {
