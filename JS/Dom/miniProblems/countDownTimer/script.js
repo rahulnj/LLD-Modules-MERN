@@ -78,7 +78,7 @@ function handleTimerRunning(countDownTime) {
     handleDisplayTime(timeLeft);
     if (timeLeft < 0) {
       clearInterval(counterId);
-      handleReset();
+      resetTimer();
       return;
     }
   }, 1000);
@@ -105,15 +105,6 @@ function formatTimeUnit(unit) {
 function validateInputTime(hours, minutes, seconds) {
   if (hours < 0 || minutes < 0 || seconds < 0) {
     alert("Negative value's are not allowed.");
-    return false;
-  } else if (hours > 24) {
-    alert('Hour is greater than 24 which is not a valid hour.');
-    return false;
-  } else if (minutes > 60) {
-    alert('Minute is greater than 60 which is not a valid minute.');
-    return false;
-  } else if (seconds > 60) {
-    alert('Second is greater than 60 which is not a valid second.');
     return false;
   }
 
