@@ -36,14 +36,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
         <h1>Count Down timer</h1>
-        <h2 class="timer__label--hrs">Hours : </h2>
-        <h2 class="timer__label--mins">Minutes : </h2>
-        <h2 class="timer__label--sec">Seconds : </h2>
+        <h2 class="timer__label--hrs">Hours</h2>
+        <h2 class="timer__label--mins">Minutes</h2>
+        <h2 class="timer__label--sec">Seconds</h2>
     </div>
 
     <!-- All the inputs are upto of 2 digits -->
@@ -58,8 +59,8 @@
     <br />
     <!-- Buttons -->
     <div class="container__btns">
-        <button class="btn start" id="start">Start</button>
-        <button class="btn reset" id="reset">Reset</button>
+        <button class="btn start" disabled id="start">Start</button>
+        <button class="btn reset" disabled id="reset">Reset</button>
         <button class="btn pause" id="pause">Pause</button>
         <button class="btn continue" id="continue">Continue</button>
     </div>
