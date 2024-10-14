@@ -39,4 +39,18 @@ const populateSuggestionBox = (countryNameArr = []) => {
   suggestionBox.appendChild(fragment);
 };
 
-searchBox.addEventListener('input', handleSuggestions);
+function debounce(cb, delay = 1000) {
+  let timeoutId = null;
+  return (...args) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    timeoutId = setTimeout(() => {
+      cb(...args);
+      timeoutId = null;
+    }, delay);
+  };
+}
+
+searchBox.addEventListener('input', debounce(handleSuggestions));
