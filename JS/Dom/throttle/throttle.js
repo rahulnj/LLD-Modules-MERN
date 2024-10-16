@@ -8,7 +8,6 @@ function throttle(fn, time) {
 
     const context = this; // Capture the context
     const args = arguments; // Capture the arguments
-    console.log(arguments);
 
     // Define a callback function for the timer
     const later = () => {
