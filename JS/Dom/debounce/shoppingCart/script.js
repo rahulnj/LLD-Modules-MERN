@@ -15,7 +15,7 @@ let pricetext = document.querySelector('p span');
 for (let i = 0; i < btns.length; i++) {
   btns[i].addEventListener(
     'click',
-    debounce(function (e) {
+    debounce(function () {
       let price = Number(btns[i].getAttribute('data-price'));
       tPrice += price;
       pricetext.innerText = tPrice;
