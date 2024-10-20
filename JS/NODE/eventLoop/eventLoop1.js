@@ -4,7 +4,7 @@ const a = 100;
 
 setImmediate(() => console.log('set Immediate called'));
 
-fs.readFile('./file.txt', 'utf8', () => {
+fs.readFile('../file.txt', 'utf8', () => {
   console.log('file read completed');
 });
 
@@ -22,3 +22,12 @@ function printA() {
 printA();
 
 console.log('End of the code');
+
+/*
+100
+End of the code
+Set timeout 1 expired
+Set timeout 2 expired
+set Immediate called
+file read completed
+*/
