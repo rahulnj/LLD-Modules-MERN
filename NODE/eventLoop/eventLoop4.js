@@ -13,6 +13,12 @@ fs.readFile('../file.txt', 'utf8', () => {
 process.nextTick(() => {
   process.nextTick(() => console.log('inner next tick'));
   console.log('nextTick');
+
+  // before these three async operations the operations which are already ready in
+  // callback queue will be executed.
+  setTimeout(() => console.log('Set timeout next tick'), 0);
+  Promise.resolve('Promise next tick').then(console.log);
+  setImmediate(() => console.log('set Immediate next tick'));
 });
 
 console.log('End of the code');
