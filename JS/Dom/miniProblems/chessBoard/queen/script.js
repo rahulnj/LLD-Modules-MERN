@@ -13,11 +13,11 @@ const directions = [
 checkBoxesDiv.forEach((box, index) => {
   box.addEventListener('click', () => {
     refreshBoard();
-    highlightBishopPath(index);
+    highlightQueensPath(index);
   });
 });
 
-function highlightBishopPath(index) {
+function highlightQueensPath(index) {
   turnCheckboxRed(index);
 
   directions.forEach(([rowStep, colStep]) => {
