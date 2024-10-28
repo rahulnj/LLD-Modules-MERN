@@ -18,7 +18,7 @@ function createReplyInput(targetElem) {
   const input = document.createElement('input');
   const button = document.createElement('button');
 
-  replyContainer.setAttribute('class', 'comment_reply_conatiner');
+  replyContainer.setAttribute('class', 'comment_reply_container');
   input.setAttribute('type', 'text');
   button.setAttribute('class', 'btn-submit');
   button.textContent = 'Submit';
@@ -62,8 +62,10 @@ function createComment(targetElem) {
   const card = createCommentCard(inputValue);
   commentContainer.appendChild(card);
 
-  const commentReplyContainer = targetElem.parentNode;
-  const commentCard = commentReplyContainer.parentNode;
+  targetElemInputField.value = '';
 
-  commentCard.replaceChild(commentContainer, commentReplyContainer);
+  const replyContainer = targetElem.parentNode;
+  const parentCard = replyContainer.parentNode;
+
+  parentCard.replaceChild(commentContainer, replyContainer);
 }
