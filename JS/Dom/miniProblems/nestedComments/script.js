@@ -1,33 +1,68 @@
-const inputField = document.querySelector('input');
-const submitBtn = document.querySelector('.btn-submit');
+const container = document.querySelector('.container');
 
-submitBtn.addEventListener('click', onSubmit);
+container.addEventListener('click', (e) => {
+  const targetElem = e.target;
+  if (targetElem.classList.contains('reply')) {
+    createReplyInput(targetElem);
+  }
 
-function onSubmit() {
-  const inputValue = inputField.value ?? '';
-  console.log(inputValue);
+  if (targetElem.classList.contains('btn-submit')) {
+    createComment(targetElem);
+  }
+});
 
-  const commentContainer = document.createElement('div');
-  commentContainer.classList.add('comment-container');
-  const card = addCommentCard(inputValue);
-  commentContainer.appendChild(card);
-  inputField.value = '';
+function createReplyInput(targetElem) {
+  const fragment = document.createDocumentFragment();
+
+  const replyContainer = document.createElement('div');
+  const input = document.createElement('input');
+  const button = document.createElement('button');
+
+  replyContainer.setAttribute('class', 'comment_reply_conatiner');
+  input.setAttribute('type', 'text');
+  button.setAttribute('class', 'btn-submit');
+  button.textContent = 'Submit';
+  replyContainer.appendChild(input);
+  replyContainer.appendChild(button);
+
+  fragment.appendChild(replyContainer);
+  targetElem.parentNode.appendChild(fragment);
 }
 
-function addCommentCard(commentValue) {
+function createCommentContainer() {
+  const commentContainer = document.createElement('div');
+  commentContainer.setAttribute('class', 'comment-container');
+  return commentContainer;
+}
+
+function createCommentCard(commentValue) {
   const commentCard = document.createElement('div');
   const commentText = document.createElement('h3');
   const reply = document.createElement('div');
 
-  commentCard.classList.add('comment_card');
-  commentText.classList.add('coment_text');
-  reply.classList.add('reply');
+  commentCard.setAttribute('class', 'comment_card');
+  commentText.setAttribute('class', 'comment_text');
+  reply.setAttribute('class', 'reply');
   reply.innerText = 'Reply';
   commentText.innerText = commentValue;
-  commentText.append(reply);
   commentCard.appendChild(commentText);
+  commentCard.appendChild(reply);
 
   return commentCard;
 }
 
-function addCommentContainer() {}
+function createComment(targetElem) {
+  const targetElemInputField = targetElem.previousElementSibling;
+  const inputValue = targetElemInputField.value;
+
+  if (!inputValue) return;
+
+  const commentContainer = createCommentContainer();
+  const card = createCommentCard(inputValue);
+  commentContainer.appendChild(card);
+
+  const commentReplyContainer = targetElem.parentNode;
+  const commentCard = commentReplyContainer.parentNode;
+
+  commentCard.replaceChild(commentContainer, commentReplyContainer);
+}
