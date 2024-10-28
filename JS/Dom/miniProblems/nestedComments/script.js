@@ -27,6 +27,7 @@ function createReplyInput(targetElem) {
 
   fragment.appendChild(replyContainer);
   targetElem.parentNode.appendChild(fragment);
+  input.focus();
 }
 
 function createCommentContainer() {
