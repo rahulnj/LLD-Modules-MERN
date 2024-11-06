@@ -1,5 +1,5 @@
 // DUMMY DATA FOR THE COLORS
-let ticketsArr = [
+const ticketsArr = [
   {
     ticketTask: 'This is task 1 (lightgreen)',
     ticketColor: 'lightgreen',
@@ -22,15 +22,13 @@ let ticketsArr = [
   },
 ];
 
-// CALLING createTicket() function for each value in ticketsArr
-ticketsArr.forEach(function (ticket) {
-  createTicket(ticket.ticketTask, ticket.ticketColor, ticket.ticketID);
-});
+createAllTickets(ticketsArr);
 
 // ADDING TICKET TO DOM
 function createTicket(ticketTask, ticketColor, ticketID) {
-  let id = ticketID || shortid();
-  let ticketCont = document.createElement('div');
+  const id = ticketID || shortid();
+  const mainCont = document.querySelector('.main-cont');
+  const ticketCont = document.createElement('div');
   ticketCont.setAttribute('class', 'ticket-cont');
 
   ticketCont.innerHTML = `<div class="ticket-color ${ticketColor}"></div>
@@ -40,7 +38,6 @@ function createTicket(ticketTask, ticketColor, ticketID) {
            <i class="fa-solid fa-lock"></i>
         </div>`;
 
-  let mainCont = document.querySelector('.main-cont');
   mainCont.append(ticketCont);
 
   if (!ticketID) {
@@ -60,7 +57,7 @@ function removeAllTickets() {
   });
 }
 
-function createTickets(ticketsArr) {
+function createAllTickets(ticketsArr) {
   ticketsArr.forEach(({ ticketTask, ticketColor, ticketID }) => {
     createTicket(ticketTask, ticketColor, ticketID);
   });
@@ -77,12 +74,12 @@ toolBox.addEventListener('click', (e) => {
   );
 
   removeAllTickets();
-  createTickets(filteredTickets);
+  createAllTickets(filteredTickets);
 });
 
 toolBox.addEventListener('dblclick', function (e) {
   if (!isToolBoxColor(e)) return;
 
   removeAllTickets();
-  createTickets(ticketsArr);
+  createAllTickets(ticketsArr);
 });
