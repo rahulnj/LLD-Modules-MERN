@@ -60,6 +60,12 @@ function removeAllTickets() {
   });
 }
 
+function createTickets(ticketsArr) {
+  ticketsArr.forEach(({ ticketTask, ticketColor, ticketID }) => {
+    createTicket(ticketTask, ticketColor, ticketID);
+  });
+}
+
 const toolBox = document.querySelector('.toolbox-priority-cont');
 
 toolBox.addEventListener('click', (e) => {
@@ -71,16 +77,12 @@ toolBox.addEventListener('click', (e) => {
     ({ ticketColor }) => ticketColor === selectedColor
   );
 
-  filteredTickets.forEach(({ ticketTask, ticketColor, ticketID }) => {
-    createTicket(ticketTask, ticketColor, ticketID);
-  });
+  createTickets(filteredTickets);
 });
 
 toolBox.addEventListener('dblclick', function (e) {
   if (!isToolBoxColor(e)) return;
 
   removeAllTickets();
-  ticketsArr.forEach((ticket) => {
-    createTicket(ticket.ticketTask, ticket.ticketColor, ticket.ticketID);
-  });
+  createTickets(ticketsArr);
 });
