@@ -22,8 +22,6 @@ const ticketsArr = [
   },
 ];
 
-createAllTickets(ticketsArr);
-
 // ADDING TICKET TO DOM
 function createTicket(ticketTask, ticketColor, ticketID) {
   const id = ticketID || shortid();
@@ -36,7 +34,8 @@ function createTicket(ticketTask, ticketColor, ticketID) {
          <div class="task-area">${ticketTask}</div>
          <div class="ticket-lock">
            <i class="fa-solid fa-lock"></i>
-        </div>`;
+         </div>
+        `;
 
   mainCont.append(ticketCont);
 
@@ -63,9 +62,7 @@ function createAllTickets(ticketsArr) {
   });
 }
 
-const toolBox = document.querySelector('.toolbox-priority-cont');
-
-toolBox.addEventListener('click', (e) => {
+function handleToolBoxColor(e) {
   if (!isToolBoxColor(e)) return;
 
   const selectedColor = e.target.classList[0];
@@ -75,11 +72,16 @@ toolBox.addEventListener('click', (e) => {
 
   removeAllTickets();
   createAllTickets(filteredTickets);
-});
+}
 
-toolBox.addEventListener('dblclick', function (e) {
+function handleToolBoxDblClick(e) {
   if (!isToolBoxColor(e)) return;
 
   removeAllTickets();
   createAllTickets(ticketsArr);
-});
+}
+
+const toolBox = document.querySelector('.toolbox-priority-cont');
+createAllTickets(ticketsArr);
+toolBox.addEventListener('click', handleToolBoxColor);
+toolBox.addEventListener('dblclick', handleToolBoxDblClick);
