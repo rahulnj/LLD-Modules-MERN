@@ -1,4 +1,3 @@
-// DUMMY DATA FOR THE COLORS
 const ticketsArr = [
   {
     ticketTask: 'This is task 1 (lightgreen)',
@@ -22,7 +21,6 @@ const ticketsArr = [
   },
 ];
 
-// ADDING TICKET TO DOM
 function createTicket(ticketTask, ticketColor, ticketID) {
   const id = ticketID || shortid();
   const mainCont = document.querySelector('.main-cont');
@@ -45,9 +43,7 @@ function createTicket(ticketTask, ticketColor, ticketID) {
   }
 }
 
-function isToolBoxColor(e) {
-  return e.target.classList[1] === 'color';
-}
+const isToolBoxColor = (e) => e.target.classList[1] === 'color';
 
 function removeAllTickets() {
   const allTickets = document.querySelectorAll('.ticket-cont');
