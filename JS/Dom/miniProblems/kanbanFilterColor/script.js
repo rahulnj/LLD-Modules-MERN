@@ -71,12 +71,12 @@ const toolBox = document.querySelector('.toolbox-priority-cont');
 toolBox.addEventListener('click', (e) => {
   if (!isToolBoxColor(e)) return;
 
-  removeAllTickets();
   const selectedColor = e.target.classList[0];
   const filteredTickets = ticketsArr.filter(
     ({ ticketColor }) => ticketColor === selectedColor
   );
 
+  removeAllTickets();
   createTickets(filteredTickets);
 });
 
