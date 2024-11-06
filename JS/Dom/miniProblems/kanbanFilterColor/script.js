@@ -47,6 +47,40 @@ function createTicket(ticketTask, ticketColor, ticketID) {
     ticketsArr.push({ ticketTask, ticketColor, ticketID: id });
     localStorage.setItem('tickets', JSON.stringify(ticketsArr));
   }
-
-  console.log(ticketsArr);
 }
+
+function isToolBoxColor(e) {
+  return e.target.classList[1] === 'color';
+}
+
+function removeAllTickets() {
+  const allTickets = document.querySelectorAll('.ticket-cont');
+  allTickets.forEach((ticket) => {
+    ticket.remove();
+  });
+}
+
+const toolBox = document.querySelector('.toolbox-priority-cont');
+
+toolBox.addEventListener('click', (e) => {
+  if (!isToolBoxColor(e)) return;
+
+  removeAllTickets();
+  const selectedColor = e.target.classList[0];
+  const filteredTickets = ticketsArr.filter(
+    ({ ticketColor }) => ticketColor === selectedColor
+  );
+
+  filteredTickets.forEach(({ ticketTask, ticketColor, ticketID }) => {
+    createTicket(ticketTask, ticketColor, ticketID);
+  });
+});
+
+toolBox.addEventListener('dblclick', function (e) {
+  if (!isToolBoxColor(e)) return;
+
+  removeAllTickets();
+  ticketsArr.forEach((ticket) => {
+    createTicket(ticket.ticketTask, ticket.ticketColor, ticket.ticketID);
+  });
+});
