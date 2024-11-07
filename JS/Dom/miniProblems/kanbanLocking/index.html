@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Please NOTE that the link to assets (like images) need to be set in global context.
+For example:
+To access an image from assets folder correct way to set src attribute is 
+
+src = 'profile.png'
+
+instead of 
+
+src = './assets/profile.png'
+-->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket Management App</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+    <!-- TOOL BOX ELEMENTS -->
+    <div class="toolbox-cont">
+        <div class="toolbox-priority-cont">
+            <div class="lightpink color"></div>
+            <div class="lightgreen color"></div>
+            <div class="lightblue color"></div>
+            <div class="black color"></div>
+        </div>
+
+
+    </div>
+
+    <!-- MAIN CONTAINER - Tickets holder -->
+    <div class="main-cont">
+        <!-- <div class="ticket-color ${ticketColor}"></div>
+       <div class="ticket-id">${id}</div>
+       <div class="task-area">${ticketTask}</div>
+       <div class="ticket-lock">
+       <button>Locked</button>
+      </div> -->
+    </div>
+    </div>
+
+    <!-- MODAL - Ticket generator window -->
+    <div class="modal-cont">
+
+        <textarea class="textArea-cont" placeholder="Enter Your Task" spellcheck="false">
+
+       </textarea>
+
+
+        <div class="priority-colors-container">
+            <div class="lightpink priority-color"></div>
+            <div class="lightgreen priority-color"></div>
+            <div class="lightblue priority-color"></div>
+            <div class="black priority-color active"></div>
+        </div>
+
+    </div>
+
+    <script src="script.js">
+    </script>
+    <script>
+        // Write your solution here =====================================================
+        const allTickets = document.querySelectorAll('.ticket-cont');
+        allTickets.forEach((ticket) => {
+            ticket.addEventListener('click', handleTicketLock);
+        });
+
+        function handleTicketLock(e) {
+            const ticket = e.currentTarget;
+            const button = e.target;
+
+            if (button.tagName !== 'BUTTON') return;
+
+            const ticketLock = ticket.querySelector('.ticket-lock') || ticket.querySelector('.ticket-unlock');
+            const taskArea = ticket.querySelector('.task-area');
+
+            if (!ticketLock || !taskArea) return;
+
+            const isLocked = ticketLock.classList.contains('ticket-lock');
+            handleToggleLock(ticketLock, taskArea, isLocked, button);
+        }
+
+        function handleToggleLock(ticketLock, taskArea, isLocked, button) {
+            if (isLocked) {
+                ticketLock.classList.replace('ticket-lock', 'ticket-unlock');
+                taskArea.setAttribute('contenteditable', 'true');
+                button.innerText = 'Unlocked'
+            } else {
+                ticketLock.classList.replace('ticket-unlock', 'ticket-lock');
+                taskArea.setAttribute('contenteditable', 'false');
+                button.innerText = 'Locked'
+            }
+        }
+    </script>
+
+
+
+</body>
+
+</html>
