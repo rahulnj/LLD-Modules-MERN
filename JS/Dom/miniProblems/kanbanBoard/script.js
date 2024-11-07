@@ -77,7 +77,33 @@ function handleToolBoxDblClick(e) {
   createAllTickets(ticketsArr);
 }
 
-const toolBox = document.querySelector('.toolbox-priority-cont');
 createAllTickets(ticketsArr);
+
+const toolBox = document.querySelector('.toolbox-priority-cont');
 toolBox.addEventListener('click', handleToolBoxColor);
 toolBox.addEventListener('dblclick', handleToolBoxDblClick);
+
+const allTickets = document.querySelectorAll('.ticket-cont');
+allTickets.forEach((ticket) => {
+  ticket.addEventListener('click', handleTicketLock);
+});
+
+function handleToggleLock(ticketLock, taskArea, isLocked) {
+  if (isLocked) {
+    ticketLock.classList.replace('fa-lock', 'fa-unlock');
+    taskArea.setAttribute('contenteditable', 'true');
+  } else {
+    ticketLock.classList.replace('fa-unlock', 'fa-lock');
+    taskArea.setAttribute('contenteditable', 'false');
+  }
+}
+
+function handleTicketLock(e) {
+  const ticketLock = e.target.closest('i');
+  const taskArea = e.target.closest('.ticket-cont').querySelector('.task-area');
+
+  if (!ticketLock) return;
+
+  const isLocked = ticketLock.classList[1] === 'fa-lock';
+  handleToggleLock(ticketLock, taskArea, isLocked);
+}
