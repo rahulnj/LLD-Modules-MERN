@@ -41,6 +41,34 @@
     </script>
     <script>
         // Write your solution here ====================================================
+        const deleteBtn = document.querySelector('.remove-btn');
+        const allTickets = document.querySelectorAll('.ticket-cont');
+        let isDeleteMode = false;
+
+
+        deleteBtn.addEventListener('click', handleDeleteBtn);
+        allTickets.forEach((ticket) => {
+            ticket.addEventListener('click', handleTicketDelete);
+        });
+
+        function handleDeleteBtn() {
+            isDeleteMode = !isDeleteMode;
+            if (isDeleteMode) {
+                alert('delete button has been activated');
+                deleteBtn.style.backgroundColor = 'red';
+            } else {
+                deleteBtn.style.backgroundColor = 'inherit';
+            }
+        }
+
+        function handleTicketDelete(e) {
+            if (!isDeleteMode) return;
+
+            // Prevent event propagation to avoid triggering parent handlers
+            e.stopPropagation();
+            const ticket = e.currentTarget;
+            ticket.remove();
+        }
     </script>
 
 
