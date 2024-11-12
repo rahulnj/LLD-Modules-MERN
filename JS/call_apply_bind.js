@@ -33,8 +33,6 @@ let ironMan = {
   team: 'Iron Man',
 };
 
-// cap.petersTeam("black panther", "Winter soldier", "Thor");
-
 // borrow a fn from another obj for another object
 // used to call it
 
