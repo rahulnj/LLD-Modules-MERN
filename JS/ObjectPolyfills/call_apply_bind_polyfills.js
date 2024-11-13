@@ -28,7 +28,7 @@ Function.prototype.customCall = function (obj, ...args) {
   obj[uniqueProp] = fnRef;
 
   // Call the method
-  const result = obj[uniqueProp](args);
+  const result = obj[uniqueProp](...args);
 
   // Delete the temp method
   delete obj[uniqueProp];
@@ -36,7 +36,7 @@ Function.prototype.customCall = function (obj, ...args) {
   return result;
 };
 
-cap.petersTeam.call(
+cap.petersTeam.customCall(
   ironMan,
   'thor',
   'loki',
