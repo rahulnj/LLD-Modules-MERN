@@ -9,3 +9,7 @@
 - Optimize the code by removing any blocking operations and implementing efficient algorithms.
 - Use Cache to store frequently accessed data and reduce database queries.
 - Optimise database queries by creating appropriate indexes and regularly monitoring query performance.
+
+## event driven architecture
+
+<https://dev.to/learn-to-earn/event-driven-architecture-in-nodejs-1o98>
