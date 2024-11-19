@@ -1,8 +1,3 @@
-// You are given a coding assignment where your task is to implement a custom mySetInterval
-// function using the built-in setTimeout function in JavaScript. The mySetInterval function
-// should allow you to repeatedly execute a callback function at a specified time interval
-// until a given end time is reached.
-
 // intervalTime (integer): The time interval, in milliseconds, at which the callback function should be executed.
 // endTime (integer): The time, in milliseconds, when the interval execution should stop.
 // message (string): The message to be appended to the array arr during each execution of the callback function.
