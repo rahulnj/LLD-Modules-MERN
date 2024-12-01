@@ -1,7 +1,7 @@
 function flatten(array) {
   let flattenedArray = [];
 
-  array.map((prop) => {
+  array.forEach((prop) => {
     if (Array.isArray(prop)) {
       const returnedArray = flatten(prop);
       flattenedArray = [...flattenedArray, ...returnedArray];
