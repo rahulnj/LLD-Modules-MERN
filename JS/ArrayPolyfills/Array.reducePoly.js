@@ -1,13 +1,30 @@
-function reduce(arr, reducer) {
-  let ans = arr[0];
+function reduce(arr, reducer, initialValue) {
+  let ans;
+  let startIndex;
 
-  for (let i = 1; i < arr.length; i++) {
+  // Check if an initial value is provided
+  if (initialValue !== undefined) {
+    ans = initialValue;
+    startIndex = 0;
+  } else {
+    if (arr.length === 0) {
+      throw new TypeError('Reduce of empty array with no initial value');
+    }
+    ans = arr[0];
+    startIndex = 1;
+  }
+
+  for (let i = startIndex; i < arr.length; i++) {
     ans = reducer(ans, arr[i]);
   }
   return ans;
 }
 
 const sumReducer = (a, b) => a + b;
+
 const arr = [1, 2, 3, 4, 5];
 const result = reduce(arr, sumReducer);
 console.log(result);
+
+const resultWithInitialValue = reduce(arr, sumReducer, 10);
+console.log(resultWithInitialValue); // Output: 25
