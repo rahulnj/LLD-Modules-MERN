@@ -13,3 +13,5 @@
 ## event driven architecture
 
 <https://dev.to/learn-to-earn/event-driven-architecture-in-nodejs-1o98>
+
+<https://dev.to/prodevopsguytech/end-to-end-aws-devops-project-automating-build-and-deployment-of-a-nodejs-application-to-amazon-h7p>
