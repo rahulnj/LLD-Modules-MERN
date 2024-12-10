@@ -1,6 +1,7 @@
-function reduce(arr, reducer, initialValue) {
+Array.prototype.customReduce = function (reducer, initialValue) {
   let ans;
   let startIndex;
+  const arr = this;
 
   // Check if an initial value is provided
   if (initialValue !== undefined) {
@@ -18,13 +19,11 @@ function reduce(arr, reducer, initialValue) {
     ans = reducer(ans, arr[i]);
   }
   return ans;
-}
+};
 
 const sumReducer = (a, b) => a + b;
 
 const arr = [1, 2, 3, 4, 5];
-const result = reduce(arr, sumReducer);
-console.log(result);
 
-const resultWithInitialValue = reduce(arr, sumReducer, 10);
+const resultWithInitialValue = arr.customReduce(sumReducer, 10);
 console.log(resultWithInitialValue); // Output: 25
