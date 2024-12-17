@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
 const element = React.createElement(
   'div',
   { id: 'parent' },
   React.createElement('div', { id: 'child' }, [
-    React.createElement('h1', { id: 'heading', key: 1 }, 'Hello World!'),
+    React.createElement('h1', { id: 'heading', key: 1 }, 'Hello World! 🚀'),
     React.createElement('h1', { id: 'heading', key: 2 }, 'Hello World!'),
   ])
 );
