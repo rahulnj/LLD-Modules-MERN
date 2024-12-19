@@ -39,7 +39,6 @@ const p2 = new Promise((resolve, reject) => {
   }, 1000);
 });
 
-// Custom Promise.all
 Promise.myPromiseAll([p0, p1, p2])
   .then((data) => {
     console.log('Custom Promise: ', data);
