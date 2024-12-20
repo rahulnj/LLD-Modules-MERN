@@ -1,5 +1,6 @@
-function map(arr = [], callback) {
+Array.prototype.customMap = function (callback) {
   const mappedArray = [];
+  const arr = this;
 
   for (let i = 0; i < arr.length; i++) {
     const result = callback(arr[i]);
@@ -7,9 +8,9 @@ function map(arr = [], callback) {
   }
 
   return mappedArray;
-}
+};
 
 const arr = [1, 2, 3, 4, 5];
 const callback = (num) => num * num;
 
-console.log(map(arr, callback));
+console.log(arr.customMap(callback));
