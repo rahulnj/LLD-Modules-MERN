@@ -16,24 +16,23 @@ function main(intervalTime, endTime, message, arr) {
     };
 
     function setter() {
+      if (!interval.working) return;
       callback();
-      if (interval.working) {
-        setTimeout(setter, time);
-      }
+      setTimeout(setter, time);
     }
 
     setTimeout(setter, time);
     return interval;
   }
 
-  setTimeout(() => {
-    i.working = false;
-  }, endTime);
-
-  let i = customSetInterval(function () {
+  const intervalHandler = customSetInterval(() => {
     console.log(message);
     arr.push(message);
   }, intervalTime);
+
+  setTimeout(() => {
+    intervalHandler.working = false;
+  }, endTime);
 }
 
 const ansArray = [];
