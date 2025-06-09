@@ -1,0 +1,189 @@
+
+===========================
+MongoDB Terminal Practice Sheet with Expected Output
+===========================
+
+📦 Collection: students
+
+----------------------------
+🧪 Insert Sample Data
+----------------------------
+db.students.insertMany([
+  { name: "Alice", age: 21, course: "Math", grades: [88, 92, 79] },
+  { name: "Bob", age: 23, course: "Physics", grades: [75, 85] },
+  { name: "Charlie", age: 22, course: "Chemistry", grades: [90, 91] },
+  { name: "David", age: 24, course: "Math", grades: [60, 70, 80] },
+  { name: "Eve", age: 20, course: "Physics", grades: [95] }
+])
+
+----------------------------
+🔹 Part 1: CRUD with Output
+----------------------------
+
+1. Insert One Document
+Q: Add Frank (25, Biology)
+Query:
+db.students.insertOne({ name: "Frank", age: 25, course: "Biology", grades: [78, 80] })
+Expected Output:
+{ acknowledged: true, insertedId: ObjectId("...") }
+
+2. Find All Documents
+Q: List all students
+Query:
+db.students.find()
+Expected Output (formatted):
+[
+  { name: "Alice", age: 21, course: "Math", grades: [88, 92, 79] },
+  { name: "Bob", age: 23, course: "Physics", grades: [75, 85] },
+  ...
+]
+
+3. Find with Condition
+Q: Students in Physics
+Query:
+db.students.find({ course: "Physics" })
+Output:
+[
+  { name: "Bob", age: 23, course: "Physics", grades: [75, 85] },
+  { name: "Eve", age: 20, course: "Physics", grades: [95] }
+]
+
+4. Update Alice's age to 22
+Query:
+db.students.updateOne({ name: "Alice" }, { $set: { age: 22 } })
+Output:
+{ acknowledged: true, matchedCount: 1, modifiedCount: 1 }
+
+5. Delete Charlie
+Query:
+db.students.deleteOne({ name: "Charlie" })
+Output:
+{ acknowledged: true, deletedCount: 1 }
+
+----------------------------
+🔸 Part 2: Query Operators
+----------------------------
+
+6. Age > 21
+Query:
+db.students.find({ age: { $gt: 21 } })
+Output:
+[
+  { name: "Bob", age: 23, ... },
+  { name: "Charlie", age: 22, ... },
+  { name: "David", age: 24, ... }
+]
+
+7. Course in Math or Chemistry
+Query:
+db.students.find({ course: { $in: ["Math", "Chemistry"] } })
+Output:
+[
+  { name: "Alice", ... },
+  { name: "Charlie", ... },
+  { name: "David", ... }
+]
+
+8. Age 21 or Course = Chemistry
+Query:
+db.students.find({ $or: [{ age: 21 }, { course: "Chemistry" }] })
+Output:
+[
+  { name: "Alice", ... },
+  { name: "Charlie", ... }
+]
+
+----------------------------
+📊 Part 3: Aggregation with Output
+----------------------------
+
+9. Group by Course
+Query:
+db.students.aggregate([
+  { $group: { _id: "$course", count: { $sum: 1 } } }
+])
+Output:
+[
+  { _id: "Math", count: 2 },
+  { _id: "Physics", count: 2 },
+  { _id: "Chemistry", count: 1 }
+]
+
+10. Sort by Age Desc
+Query:
+db.students.aggregate([{ $sort: { age: -1 } }])
+Output:
+[
+  { name: "David", age: 24, ... },
+  { name: "Bob", age: 23, ... },
+  ...
+]
+
+11. Project Name + Age
+Query:
+db.students.aggregate([
+  { $project: { name: 1, age: 1, _id: 0 } }
+])
+Output:
+[
+  { name: "Alice", age: 21 },
+  { name: "Bob", age: 23 },
+  ...
+]
+
+12. Avg Grade per Student
+Query:
+db.students.aggregate([
+  { $project: { name: 1, avgGrade: { $avg: "$grades" } } }
+])
+Output:
+[
+  { name: "Alice", avgGrade: 86.33 },
+  { name: "Bob", avgGrade: 80 },
+  ...
+]
+
+----------------------------
+🔽 Part 4: Pagination & Limit/Skip
+----------------------------
+
+13. Limit the number of results
+Q: Show only the first 3 students.
+Query:
+db.students.find().limit(3)
+Expected Output:
+[
+  { name: "Alice", ... },
+  { name: "Bob", ... },
+  { name: "Charlie", ... }
+]
+
+14. Skip and then Limit
+Q: Skip the first 2 students and show the next 2.
+Query:
+db.students.find().skip(2).limit(2)
+Expected Output:
+[
+  { name: "Charlie", ... },
+  { name: "David", ... }
+]
+
+15. Sort and Paginate
+Q: Sort students by name alphabetically and show the first 2.
+Query:
+db.students.find().sort({ name: 1 }).limit(2)
+Expected Output:
+[
+  { name: "Alice", ... },
+  { name: "Bob", ... }
+]
+
+16. Paginate with skip + limit
+Q: Implement page 2 of size 2 (skip 2, take 2)
+Query:
+db.students.find().skip(2).limit(2)
+Output:
+[
+  { name: "Charlie", ... },
+  { name: "David", ... }
+]
