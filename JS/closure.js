@@ -16,9 +16,10 @@ function outer1() {
   return arrFn;
 }
 let arrFn1 = outer1();
-arrFn1[0](); // Output : 3
-arrFn1[1](); // Output : 3
-arrFn1[2](); // Output : 3
+arrFn1[0]();
+arrFn1[1]();
+arrFn1[2]();
+// Output: 3 3 3
 
 // Reason : In your code, the output will be 3 for all three function calls.
 // This happens because the variable i is shared among all the functions in the
@@ -77,36 +78,59 @@ function A() {
   C();
 }
 a = 3;
-A(); // Output : undefined 2 2 2
+A();
+// Output : undefined 2 2 2
 
 // Problem 4 : Lexical scope
 let b;
-console.log(b); // undefined
+console.log(b);
 function B() {
   let b;
-  console.log(b); // undefined
+  console.log(b);
   function E() {
     b = 6;
-    console.log(b); // 6
+    console.log(b);
   }
   b = 2;
   E();
-  console.log(b); // 6
+  console.log(b);
 }
 
 b = 3;
 
-B(); // Output : undefined undefined 6 6
+B();
+// Output : undefined undefined 6 6
+
+let theme;
+console.log(theme);
+
+function setTheme() {
+  let theme;
+  console.log(theme);
+  function updateTheme() {
+    theme = 'dark';
+    console.log(theme);
+  }
+  theme = 'light';
+  updateTheme();
+  console.log(theme);
+}
+
+theme = 'default';
+
+setTheme();
+// Output : undefined undefined dark dark
 
 // Problem 4 : lexical scope
 let c;
-console.log(c); // undefined
+console.log(c);
 function F() {
-  console.log(c); // 2
+  console.log(c);
   c = 3;
 }
 c = 2;
-F(); // Output : undefined 2
+F();
+// Output : undefined 2
 
 // Problem 5
 function createCounter(init, delta) {

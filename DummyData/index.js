@@ -31,7 +31,7 @@ db.orders.aggregate([
 //   { _id: 3, totalOrders: 1 })
 // ];
 
-const data2 = [
+const users = [
   {
     id: 1,
     name: 'Alice',
