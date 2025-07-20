@@ -136,3 +136,38 @@ const promiseAll = async () => {
 
 promiseAll().then(console.log).catch(console.log);
 // output : 4
+
+// Problem 5:
+// This code demonstrates the order of execution in JavaScript's event loop and how promises interact with
+// the microtask queue and the macrotask queue.
+// The output will be:
+console.log('X');
+
+setTimeout(() => {
+  console.log('Y');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Z');
+});
+
+// output : X Z Y
+
+// Explanation:
+// 1. The first console.log('X') is executed immediately, printing 'X'
+// 2. The setTimeout callback is scheduled to run after 0 milliseconds, but it goes to the macrotask queue.
+// 3. The Promise.resolve().then() callback is scheduled to run in the microtask queue.
+// 4. The event loop first processes the microtask queue,
+//    so the Promise callback is executed next, printing 'Z'.
+// 5. Finally, the event loop processes the macrotask queue, executing the setTimeout callback, which prints 'Y'.
+// 6. Therefore, the final output is 'X', 'Z', 'Y'.
+
+console.log('X');
+
+setTimeout(() => {
+  console.log('Y');
+  Promise.resolve().then(() => {
+    console.log('Z');
+  });
+}, 0);
+// output : X Y Z

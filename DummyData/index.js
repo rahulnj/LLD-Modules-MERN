@@ -17,6 +17,68 @@ const data1 = [
   { _id: 104, userId: 3, amount: 90, status: 'delivered', items: ['eraser'] },
 ];
 
+const invoices = [
+  {
+    id: 201,
+    customerId: 10,
+    total: 1500,
+    status: 'paid',
+    items: ['monitor', 'cable'],
+  },
+  {
+    id: 202,
+    customerId: 11,
+    total: 2300,
+    status: 'unpaid',
+    items: ['laptop'],
+  },
+  {
+    id: 203,
+    customerId: 10,
+    total: 600,
+    status: 'paid',
+    items: ['keyboard', 'mouse'],
+  },
+  {
+    id: 204,
+    customerId: 12,
+    total: 800,
+    status: 'cancelled',
+    items: ['webcam'],
+  },
+];
+
+const bookings = [
+  {
+    id: 301,
+    userId: 21,
+    amount: 1200,
+    status: 'confirmed',
+    services: ['spa', 'dinner'],
+  },
+  {
+    id: 302,
+    userId: 22,
+    amount: 3000,
+    status: 'pending',
+    services: ['room', 'breakfast'],
+  },
+  {
+    id: 303,
+    userId: 23,
+    amount: 1500,
+    status: 'cancelled',
+    services: ['airport pickup'],
+  },
+  {
+    id: 304,
+    userId: 21,
+    amount: 2200,
+    status: 'confirmed',
+    services: ['room', 'dinner'],
+  },
+];
+
 db.orders.aggregate([
   {
     $group: {
